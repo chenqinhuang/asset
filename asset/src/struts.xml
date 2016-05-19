@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+<constant name="struts.objectFactory" value="spring"/>
+			<package name="struts2" extends="struts-default,json-default" >
+					
+			<!-- 用户Action -->
+			<!-- 登录 -->
+			<action name="userLogin" class="userLogin" method="userLogin">
+			<!-- class是applicationcontext的bean id ，method是同对应Action中的方法 -->
+				<result type="json">
+			           <param name="root">msg</param>  
+			     </result>      
+			</action>
+			
+			<!-- 注册 -->
+			<action name="registerLogin" class="com.action.RegisterAction" method="register">
+				<result name="register">/jsp/register.jsp</result> 
+				<result name="no">/jsp/register.jsp</result>
+			</action>
+			
+			<!-- 展示用户列表 -->
+			<action name="showUserList" class="showUserList" method="userList">
+				<result type="json">  
+                    <param name="root">dataMap</param>  
+            	</result> 
+			</action> 
+			
+			<!-- 删除 -->
+			<action name="deleteUser" class="deleteUser" method="deleteUser">
+			     <result type="json">
+			         <param name="root">msg</param>  
+			     </result> 
+            </action>
+            
+            <!-- 获取单个用户信息 -->
+            <action name="getUser" class="getUser" method="getUser">
+				<result type="json">  
+                    <param name="root">userMap</param>  
+            	</result> 
+			</action> 
+			
+			<!-- 修改用户信息 -->
+            <action name="updateUser" class="updateUser" method="updateUser">
+				<result type="json">  
+                    <param name="root">msg</param>  
+            	</result> 
+			</action> 
+            
+            <!-- 添加用户 -->
+			<action name="addUser" class="addUser" method="addUser">
+				<result type="json">  
+                    <param name="root">msg</param>  
+            	</result> 
+			</action>
+            <!-- 部门Action -->
+
+            <action name="getDeptList" class="getDeptList" method="getDeptList">
+				<result type="json">  
+                    <param name="root">dataMap</param>  
+            	</result> 
+			</action> 
+			
+			<!-- 添加部门 -->
+			<action name="addDept" class="addDept" method="addDept">
+				<result type="json">  
+                    <param name="root">msg</param>  
+            	</result> 
+			</action>
+			
+			<!-- 删除部门 -->
+			<action name="deleteDept" class="deleteDept" method="deleteDept">
+			     <result type="json">
+			         <param name="root">msg</param>  
+			     </result> 
+            </action>
+            
+            <!-- 创建或更新 -->
+            <action name="saveOrUpdateDept" class="saveOrUpdateDept" method="saveOrUpdateDept">
+			     <result type="json">
+			         <param name="root">msg</param>  
+			     </result> 
+            </action>
+            
+            <!-- 获取部门信息ById -->
+            <action name="getDeptById" class="getDeptById" method="getDeptById">
+			     <result type="json">
+			         <param name="root">deptMap</param>  
+			     </result> 
+            </action>
+            
+            
+            <!-- 资产类型Action -->
+            <!-- 增加资产类型 -->
+			<action name="addAssType" class="addAssType" method="addAssType">
+				<result type="json">  
+                    <param name="root">msg</param>  
+            	</result> 
+			</action>
+            <!-- 获取资产类型列表 -->
+            <action name="getAssTypeList" class="getAssTypeList" method="getAssTypeList">
+				<result type="json">  
+                    <param name="root">dataMap</param>  
+            	</result> 
+			</action> 
+			<!-- 更新 -->
+			<action name="saveOrUpdateAssType" class="saveOrUpdateAssType" method="saveOrUpdateAssType">
+				<result type="json">  
+                    <param name="root">msg</param>  
+            	</result> 
+			</action>
+			<!-- 删除资产类型 -->
+			<action name="deleteAssType" class="deleteAssType" method="deleteAssType">
+				<result type="json">  
+                    <param name="root">msg</param>  
+            	</result> 
+			</action>
+			<!-- 获取资产类型信息ById -->
+			<action name="getAssetTypeById" class="getAssetTypeById" method="getAssetTypeById">
+				<result type="json">  
+                    <param name="root">assTypeMap</param>  
+            	</result> 
+			</action>
+			
+			<!-- 参数信息Action -->
+            <!-- 增加参数信息 -->
+			<action name="addParaInfo" class="addParaInfo" method="addParaInfo">
+				<result type="json">  
+                    <param name="root">msg</param>  
+            	</result> 
+			</action>
+			<!-- 获取参数信息列表 -->
+            <action name="getParaInfoList" class="getParaInfoList" method="getParaInfoList">
+				<result type="json">  
+                    <param name="root">dataMap</param>  
+            	</result> 
+			</action> 
+			<!-- 更新 -->
+			<action name="saveOrUpdateParaInfo" class="saveOrUpdateParaInfo" method="saveOrUpdateParaInfo">
+				<result type="json">  
+                    <param name="root">msg</param>  
+            	</result> 
+			</action>
+			<!-- 删除参数信息 -->
+			<action name="deleteParaInfo" class="deleteParaInfo" method="deleteParaInfo">
+				<result type="json">  
+                    <param name="root">msg</param>  
+            	</result> 
+			</action>
+			<!-- 获取参数信息ById -->
+			<action name="getParaInfoById" class="getParaInfoById" method="getParaInfoById">
+				<result type="json">  
+                    <param name="root">paraInfoMap</param>  
+            	</result> 
+			</action>
+            
+            
+            <!-- 采购单Action -->
+            <!-- 增加采购单信息 -->
+			<action name="addPurchaseOrder" class="addPurchaseOrder" method="addPurchaseOrder">
+				<result type="json">  
+                    <param name="root">msg</param>  
+            	</result> 
+			</action>
+			<!-- 获取采购单信息列表 -->
+            <action name="getPurchaseList" class="getPurchaseList" method="getPurchaseList">
+				<result type="json">  
+                    <param name="root">dataMap</param>  
+            	</result> 
+			</action> 
+			<!-- 更新 -->
+			<action name="saveOrUpdatePurchaseOrder" class="saveOrUpdatePurchaseOrder" method="saveOrUpdatePurchaseOrder">
+				<result type="json">  
+                    <param name="root">msg</param>  
+            	</result> 
+			</action>
+			<!-- 删除采购单信息 -->
+			<action name="deletePurchaseOrder" class="deletePurchaseOrder" method="deletePurchaseOrder">
+				<result type="json">  
+                    <param name="root">msg</param>  
+            	</result> 
+			</action>
+			<!-- 获取采购单信息ById -->
+			<action name="getPurchaseOrderById" class="getPurchaseOrderById" method="getPurchaseOrderById">
+				<result type="json">  
+                    <param name="root">purchaseOrderMap</param>  
+            	</result> 
+			</action>
+            
+            
+            <!-- 采购单详情Action -->
+            <!-- 增加采购单详情信息 -->
+			<action name="addPurchaseOrderDetail" class="addPurchaseOrderDetail" method="addPurchaseOrderDetail">
+				<result type="json">  
+                    <param name="root">msg</param>  
+            	</result> 
+			</action>
+			<!-- 获取采购单详情信息列表 -->
+            <action name="getPurchaseOrderDetailList" class="getPurchaseOrderDetailList" method="getPurchaseOrderDetailList">
+				<result type="json">  
+                    <param name="root">dataMap</param>  
+            	</result> 
+			</action> 
+			<!-- 更新 -->
+			<action name="saveOrUpdatePurchaseOrderDetail" class="saveOrUpdatePurchaseOrderDetail" method="saveOrUpdatePurchaseOrderDetail">
+				<result type="json">  
+                    <param name="root">msg</param>  
+            	</result> 
+			</action>
+			<!-- 删除采购单详情信息 -->
+			<action name="deletePurchaseOrderDetail" class="deletePurchaseOrderDetail" method="deletePurchaseOrderDetail">
+				<result type="json">  
+                    <param name="root">msg</param>  
+            	</result> 
+			</action>
+			<!-- 获取采购单详情信息ById -->
+			<action name="getPurchaseOrderDetailById" class="getPurchaseOrderDetailById" method="getPurchaseOrderDetailById">
+				<result type="json">  
+                    <param name="root">purchaseOrderDetailMap</param>  
+            	</result> 
+			</action>
+			
+			
+			<!-- 资产表Action -->
+			<!-- 获取采购单详情信息列表 -->
+            <action name="getAssetList" class="getAssList" method="assetList">
+				<result type="json">  
+                    <param name="root">dataMap</param>  
+            	</result> 
+			</action> 
+			<!-- 资产入库 -->
+            <action name="addAsset" class="addAsset" method="addAsset">
+				<result type="json">  
+                    <param name="root">msg</param>  
+            	</result> 
+			</action> 
+            
+
+			</package>
+			
+</struts>    

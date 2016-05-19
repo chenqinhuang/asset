@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/asset?useUnicode=true&amp;characterEncoding=utf-8">
+		</property>
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+
+		<property name="mappingResources">
+			<list>
+				<value>com/entity/AllocateOrder.hbm.xml</value>
+				<value>com/entity/ParamInfo.hbm.xml</value>
+				<value>com/entity/PurchaseOrder.hbm.xml</value>
+				<value>com/entity/AsTransfer.hbm.xml</value>
+				<value>com/entity/CheckDetail.hbm.xml</value>
+				<value>com/entity/User.hbm.xml</value>
+				<value>com/entity/Retirement.hbm.xml</value>
+				<value>com/entity/AsMaintain.hbm.xml</value>
+				<value>com/entity/Ass.hbm.xml</value>
+				<value>com/entity/AssCheck.hbm.xml</value>
+				<value>com/entity/AsTransferOrder.hbm.xml</value>
+				<value>com/entity/Dept.hbm.xml</value>
+				<value>com/entity/PurchaseOrderDetail.hbm.xml</value>
+				<value>com/entity/AssType.hbm.xml</value>
+				<value>com/entity/AsReturn.hbm.xml</value></list>
+		</property></bean>
+	
+	<!-- Dao配置 -->
+	<!-- Dao start-->
+	<bean id="UserDao" class="com.dao.impl.UserDao" >
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="DeptDao" class="com.dao.impl.DeptDao" >
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="AssetTypeDao" class="com.dao.impl.AssetTypeDao" >
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="ParamInfoDao" class="com.dao.impl.ParamInfoDao" >
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="PurchaseDao" class="com.dao.impl.PurchaseDao" >
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="PurchaseDetailDao" class="com.dao.impl.PurchaseDetailDao" >
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="AssetDao" class="com.dao.impl.AssetDao" >
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<!-- Dao end-->
+	
+	
+	<!-- Service配置 -->
+	<!-- Service start-->
+	<bean id="userService" class="com.service.impl.UserService" scope="prototype">
+		<property name="userDao" ref="UserDao"/>
+		<property name="baseDao" ref="UserDao"/>
+	</bean>
+	
+	<bean id="deptService" class="com.service.impl.DeptService" scope="prototype">
+		<property name="deptDao" ref="DeptDao"/>
+		<property name="baseDao" ref="UserDao"/>
+	</bean>
+	
+	<bean id="assetTypeService" class="com.service.impl.AssetTypeService" scope="prototype">
+		<property name="baseDao" ref="AssetTypeDao"/>
+	</bean>
+	
+	<bean id="paramInfoService" class="com.service.impl.ParamInfoService" scope="prototype">
+		<property name="baseDao" ref="ParamInfoDao"/>
+	</bean>
+	
+	<bean id="purchaseService" class="com.service.impl.PurchaseService" scope="prototype">
+		<property name="baseDao" ref="PurchaseDao"/>
+	</bean>
+	
+	<bean id="purchaseDetailService" class="com.service.impl.PurchaseDetailService" scope="prototype">
+		<property name="baseDao" ref="PurchaseDetailDao"/>
+	</bean>
+	
+	<bean id="assetService" class="com.service.impl.AssetService" scope="prototype">
+		<property name="baseDao" ref="AssetDao"/>
+	</bean>
+	
+	<!-- Service end-->
+	
+	
+	
+	
+	<!-- Action配置 -->
+	<!-- Action -->
+	<!-- 登录 -->
+	<bean id="userLogin" class="com.action.LoginAction" scope="prototype">
+		<property name="userService" ref="userService"/>
+	</bean>
+	<!-- 注册 -->
+	<bean id="registerLogin" class="com.action.RegisterAction" scope="prototype">
+		<property name="userService" ref="userService"/>
+	</bean>
+	<!-- 用户管理 start-->
+	<bean id="showUserList" class="com.action.UserListAction" scope="prototype">
+		<property name="userService" ref="userService"/>
+	</bean>
+	
+	<bean id="deleteUser" class="com.action.DeleteUserAction" scope="prototype">
+	    <property name="userService" ref="userService"/>
+	</bean>
+	
+	<bean id="getUser" class="com.action.GetUserAction" scope="prototype">
+	    <property name="userService" ref="userService"/>
+	</bean>
+	
+	<bean id="updateUser" class="com.action.UpdateUserAction" scope="prototype">
+	    <property name="userService" ref="userService"/>
+	</bean>
+	
+	<bean id="addUser" class="com.action.UserListAction" scope="prototype">
+	    <property name="userService" ref="userService"/>
+	</bean>
+	<!-- 用户管理 end-->
+	
+	<!-- 部门管理 start-->
+	<bean id="getDeptList" class="com.action.DeptAction" scope="prototype">
+	    <property name="deptService" ref="deptService"/>
+	</bean>
+	
+	<bean id="deleteDept" class="com.action.DeptAction" scope="prototype">
+	    <property name="deptService" ref="deptService"/>
+	</bean>
+	
+	<bean id="saveOrUpdateDept" class="com.action.DeptAction" scope="prototype">
+	    <property name="deptService" ref="deptService"/>
+	</bean>
+	
+	<bean id="getDeptById" class="com.action.DeptAction" scope="prototype">
+	    <property name="deptService" ref="deptService"/>
+	</bean>
+	
+	<bean id="addDept" class="com.action.DeptAction" scope="prototype">
+	    <property name="deptService" ref="deptService"/>
+	</bean>
+	<!-- 部门管理 end-->
+	
+	<!-- 资产类型管理 start-->
+	<bean id="addAssType" class="com.action.AssetTypeAction" scope="prototype">
+	    <property name="assetTypeService" ref="assetTypeService"/>
+	</bean>
+	
+	<bean id="getAssTypeList" class="com.action.AssetTypeAction" scope="prototype">
+	    <property name="assetTypeService" ref="assetTypeService"/>
+	</bean>
+	
+	<bean id="saveOrUpdateAssType" class="com.action.AssetTypeAction" scope="prototype">
+	    <property name="assetTypeService" ref="assetTypeService"/>
+	</bean>
+	
+	<bean id="deleteAssType" class="com.action.AssetTypeAction" scope="prototype">
+	    <property name="assetTypeService" ref="assetTypeService"/>
+	</bean>
+	
+	<bean id="getAssetTypeById" class="com.action.AssetTypeAction" scope="prototype">
+	    <property name="assetTypeService" ref="assetTypeService"/>
+	</bean>
+	<!-- 资产类型管理 end-->
+	
+	
+	<!-- 参数信息管理 start-->
+	<bean id="addParaInfo" class="com.action.ParamInfoAction" scope="prototype">
+	    <property name="paramInfoService" ref="paramInfoService"/>
+	</bean>
+	
+	<bean id="getParaInfoList" class="com.action.ParamInfoAction" scope="prototype">
+	    <property name="paramInfoService" ref="paramInfoService"/>
+	</bean>
+	
+	<bean id="saveOrUpdateParaInfo" class="com.action.ParamInfoAction" scope="prototype">
+	    <property name="paramInfoService" ref="paramInfoService"/>
+	</bean>
+	
+	<bean id="deleteParaInfo" class="com.action.ParamInfoAction" scope="prototype">
+	    <property name="paramInfoService" ref="paramInfoService"/>
+	</bean>
+	
+	<bean id="getParaInfoById" class="com.action.ParamInfoAction" scope="prototype">
+	    <property name="paramInfoService" ref="paramInfoService"/>
+	</bean>
+	<!-- 参数信息管理 end-->
+	
+	<!-- 采购入库管理 start-->
+	<bean id="addPurchaseOrder" class="com.action.PurchaseAction" scope="prototype">
+	    <property name="purchaseService" ref="purchaseService"/>
+	</bean>
+	<bean id="getPurchaseList" class="com.action.PurchaseAction" scope="prototype">
+	    <property name="purchaseService" ref="purchaseService"/>
+	</bean>
+	
+	<bean id="saveOrUpdatePurchaseOrder" class="com.action.PurchaseAction" scope="prototype">
+	    <property name="purchaseService" ref="purchaseService"/>
+	</bean>
+	
+	<bean id="deletePurchaseOrder" class="com.action.PurchaseAction" scope="prototype">
+	    <property name="purchaseService" ref="purchaseService"/>
+	</bean>
+	
+	<bean id="getPurchaseOrderById" class="com.action.PurchaseAction" scope="prototype">
+	    <property name="purchaseService" ref="purchaseService"/>
+	</bean>
+	<!-- 采购入库管理 end-->
+	
+	<!-- 采购单详情 start-->
+	<bean id="addPurchaseOrderDetail" class="com.action.PurchaseDetailAction" scope="prototype">
+	    <property name="purchaseDetailService" ref="purchaseDetailService"/>
+	</bean>
+	
+	<bean id="getPurchaseOrderDetailList" class="com.action.PurchaseDetailAction" scope="prototype">
+	    <property name="purchaseDetailService" ref="purchaseDetailService"/>
+	</bean>
+	
+	<bean id="saveOrUpdatePurchaseOrderDetail" class="com.action.PurchaseDetailAction" scope="prototype">
+	    <property name="purchaseDetailService" ref="purchaseDetailService"/>
+	</bean>
+	
+	<bean id="deletePurchaseOrderDetail" class="com.action.PurchaseDetailAction" scope="prototype">
+	    <property name="purchaseDetailService" ref="purchaseDetailService"/>
+	</bean>
+	
+	<bean id="getPurchaseOrderDetailById" class="com.action.PurchaseDetailAction" scope="prototype">
+	    <property name="purchaseDetailService" ref="purchaseDetailService"/>
+	</bean>
+	<!-- 采购入库管理 end-->
+	
+	<!-- 资产列表 start-->
+	
+	
+	<bean id="getAssList" class="com.action.AssAction" scope="prototype">
+	    <property name="assetService" ref="assetService"/>
+	</bean>
+	
+	<bean id="addAsset" class="com.action.AssAction" scope="prototype">
+	    <property name="assetService" ref="assetService"/>
+	    <property name="purchaseDetailService" ref="purchaseDetailService"/>
+	</bean>
+	
+	<!-- 资产列表 end-->
+
+	
+</beans>
+		
+
+		
